@@ -1,7 +1,9 @@
 import {cardActionTypes} from './card.types';
+import {addItemsToCart} from '../../redux/card/card.utils';
 
 const INITIAL_STATE = {
-    visible: false
+    visible: false,
+    cartItems: []
 }
 
 const cardReducer = (state = INITIAL_STATE, action) => {
@@ -12,6 +14,11 @@ const cardReducer = (state = INITIAL_STATE, action) => {
                     visible: !state.visible
             }
             )
+        case cardActionTypes.ADD_ITEM:
+            return ( {
+                ...state,
+                cartItems: addItemsToCart(state.cartItems, action.payload)
+            })
         default: 
             return state;
     }
